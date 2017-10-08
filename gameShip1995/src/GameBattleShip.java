@@ -46,7 +46,7 @@ class GameBattleShip extends JFrame {
                     if (!humanShots.hitSamePlace(x, y)) {
                         comCount++;
                         humanShots.add(x, y, true);
-                        if (aiShips.checkHit(x, y)) { // human hit the target
+                        if (aiShips.checkHit(x, y)) {
                             if (!aiShips.checkSurvivors()) {
                                 board.append("\n" + YOU_WON + "\n" + " Колличество попыток : " + comCount);
                                 gameOver = true;
