@@ -47,7 +47,7 @@ class GameBattleShip extends JFrame {
                     if (!humanShots.hitSamePlace(x, y)) { // Проверка на повторный выстрел в ту же ячейку
                         comCount++;
                         humanShots.add(x, y, true);
-                        if (aiShips.checkHit(x, y)) {//Проверка на поподание в корабль
+                        if (aiShips.checkHit(x, y)) {//Проверка на попадание в корабль
                             if (aiShips.parkShip() != parkShipCount) {//Проверка потоплен ли корабль
                                 if (aiShips.parkShip() != 0) {
                                     textPanel.append("\n" + " Корабль потоплен!" + "\n" +
@@ -55,8 +55,8 @@ class GameBattleShip extends JFrame {
                                     parkShipCount = aiShips.parkShip();
                                 }
                             }
-                            if (!aiShips.checkSurvivors()) {//Проверка на последнее поподание
-                                textPanel.append("\n" + YOU_WON + "\n" + " Колличество попыток : " + comCount);
+                            if (!aiShips.checkSurvivors()) {//Проверка на последнее попадание
+                                textPanel.append("\n" + YOU_WON + "\n" + " Количество попыток : " + comCount);
                                 gameOver = true;
                             }
                         }

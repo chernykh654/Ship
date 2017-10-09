@@ -20,7 +20,7 @@ class Cell {
     int getX() { return x; }
     int getY() { return y; }
 
-//Метод проверки на поподание в ячейку
+//Метод проверки на попадание в ячейку
     boolean checkHit(int x, int y) {
         if (this.x == x && this.y == y) {
             color = RED; // при поподании изменяем цвет на RED

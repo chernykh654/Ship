@@ -33,12 +33,12 @@ class Ships {
         for (Ship ship : ships) if (ship.isOverlayOrTouch(ctrlShip)) return true;
         return false;
     }
-// Метод проверки поподания в корабль
+// Метод проверки попадания в корабль
     boolean checkHit(int x, int y) {
         for (Ship ship : ships) if (ship.checkHit(x, y)) return true;
         return false;
     }
-// Метод проверки наличие непотопленных кораблей
+// Метод проверки наличие не потопленных кораблей
     boolean checkSurvivors() {
         for (Ship ship : ships) if (ship.isAlive()) return true;
         return false;

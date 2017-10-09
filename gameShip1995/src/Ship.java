@@ -7,7 +7,7 @@ class Ship {
 
 /* Конструктор Ship
 @х и у , координаты
-@lenght колличество палуб
+@lenght количество палуб
 @position позиция вертикально/горизонтально
  */
     Ship(int x, int y, int length, int position) {
@@ -40,7 +40,7 @@ class Ship {
                         return true;
         return false;
     }
-    //Метод проверки на поподание в корабль
+    //Метод проверки на попадание в корабль
     boolean checkHit(int x, int y) {
         for (Cell cell : cells) if (cell.checkHit(x, y)) return true;
         return false;
