@@ -116,7 +116,7 @@ class GameBattleShip extends JFrame {
     }
 
     void init() { // // Метод инициализации
-        aiShips = new Ships(FIELD_SIZE, CELL_SIZE, false);
+        aiShips = new Ships(FIELD_SIZE, CELL_SIZE, true);
         humanShots = new Shots(CELL_SIZE);
         textPanel.setText(BTN_INIT);
         gameOver = false;
