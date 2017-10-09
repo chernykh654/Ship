@@ -2,8 +2,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 class Shot {
-    private int x, y;
-    private boolean shot;
+    private int x, y; //Кординаты
+    private boolean shot; // true (Выстрел) / false (Метка)
 
     Shot(int x, int y, boolean shot) {
         this.x = x;
@@ -13,6 +13,7 @@ class Shot {
 
     int getX() { return x; }
     int getY() { return y; }
+
     boolean isShot() { return shot; }
 
     void paint(Graphics g, int cellSize) {

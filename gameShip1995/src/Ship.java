@@ -5,6 +5,11 @@ import java.util.ArrayList;
 class Ship {
     private ArrayList<Cell> cells = new ArrayList<Cell>();
 
+/* Конструктор Ship
+@х и у , координаты
+@lenght колличество палуб
+@position позиция вертикально/горизонтально
+ */
     Ship(int x, int y, int length, int position) {
         for (int i = 0; i < length; i++)
             cells.add(
@@ -22,9 +27,7 @@ class Ship {
     }
 //Метод проверки наложение на другое судно или соприкосновение с ним
     boolean isOverlayOrTouch(Ship ctrlShip) {
-        for (Cell cell : cells)
-            if (ctrlShip.isOverlayOrTouchCell(cell))
-                return true;
+        for (Cell cell : cells) if (ctrlShip.isOverlayOrTouchCell(cell)) return true;
         return false;
     }
 
@@ -39,21 +42,16 @@ class Ship {
     }
     //Метод проверки на поподание в корабль
     boolean checkHit(int x, int y) {
-        for (Cell cell : cells)
-            if (cell.checkHit(x, y))
-                return true;
+        for (Cell cell : cells) if (cell.checkHit(x, y)) return true;
         return false;
     }
-
+//Жив ли корабль ?
     boolean isAlive() {
-        for (Cell cell : cells)
-            if (cell.isAlive())
-                return true;
+        for (Cell cell : cells) if (cell.isAlive()) return true;
         return false;
     }
 
     void paint(Graphics g, int cellSize, boolean hide) {
-        for (Cell cell : cells)
-            cell.paint(g, cellSize, hide);
+        for (Cell cell : cells) cell.paint(g, cellSize, hide);
     }
 }

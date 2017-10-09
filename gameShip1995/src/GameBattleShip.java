@@ -15,13 +15,14 @@ class GameBattleShip extends JFrame {
     final int MOUSE_BUTTON_LEFT = 1;
     final int MOUSE_BUTTON_RIGHT = 3;
 
-    JTextArea board;
+    JTextArea textPanel;
     Canvas leftPanel;
     Ships aiShips;
     Shots humanShots;
     Random random;
     boolean gameOver;
-    int comCount =0 ;
+    int comCount = 0 ;
+    int parkShipCount = 10;
 
     public static void main(String[] args) {
         new GameBattleShip();
@@ -32,7 +33,7 @@ class GameBattleShip extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
 
-        leftPanel = new Canvas();
+        leftPanel = new Canvas(); //
         leftPanel.setPreferredSize(new Dimension(PANEL_SIZE, PANEL_SIZE));
         leftPanel.setBackground(Color.white);
         leftPanel.setBorder(BorderFactory.createLineBorder(Color.blue));
@@ -40,25 +41,31 @@ class GameBattleShip extends JFrame {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                int x = e.getX()/CELL_SIZE; // преобразование в координаты
+                int x = e.getX()/CELL_SIZE; // Преобразование в координаты
                 int y = e.getY()/CELL_SIZE;
                 if (e.getButton() == MOUSE_BUTTON_LEFT && !gameOver) {// Левая кнопка мыши
-                    if (!humanShots.hitSamePlace(x, y)) {
+                    if (!humanShots.hitSamePlace(x, y)) { // Проверка на повторный выстрел в ту же ячейку
                         comCount++;
                         humanShots.add(x, y, true);
-                        if (aiShips.checkHit(x, y)) {
-                            if (!aiShips.checkSurvivors()) {
-                                board.append("\n" + YOU_WON + "\n" + " Колличество попыток : " + comCount);
+                        if (aiShips.checkHit(x, y)) {//Проверка на поподание в корабль
+                            if (aiShips.parkShip() != parkShipCount) {//Проверка потоплен ли корабль
+                                if (aiShips.parkShip() != 0) {
+                                    textPanel.append("\n" + " Корабль потоплен!" + "\n" +
+                                            " Осталась убить : " + aiShips.parkShip() + " кораблей");
+                                    parkShipCount = aiShips.parkShip();
+                                }
+                            }
+                            if (!aiShips.checkSurvivors()) {//Проверка на последнее поподание
+                                textPanel.append("\n" + YOU_WON + "\n" + " Колличество попыток : " + comCount);
                                 gameOver = true;
                             }
                         }
                         leftPanel.repaint();
-                        board.setCaretPosition(board.getText().length());
+                        textPanel.setCaretPosition(textPanel.getText().length());
 
                     }
                 }
                 if (e.getButton() == MOUSE_BUTTON_RIGHT) { // Правая кнопка мыши
-
                     Shot label = humanShots.getLabel(x, y);
                     if (label != null)
                         humanShots.removeLabel(label);
@@ -84,11 +91,11 @@ class GameBattleShip extends JFrame {
             }
         });
 
-        board = new JTextArea(); // панель для вывода системного текста
-        board.setEditable(false);
-        JScrollPane scroll = new JScrollPane(board);
+        textPanel = new JTextArea(); // Панель для вывода системного текста
+        textPanel.setEditable(false);
+        JScrollPane scroll = new JScrollPane(textPanel);
 
-        JPanel buttonPanel = new JPanel(); // панель для копок
+        JPanel buttonPanel = new JPanel(); // Панель для копок
         buttonPanel.setLayout(new GridLayout());
         buttonPanel.add(init);
         buttonPanel.add(exit);
@@ -102,21 +109,21 @@ class GameBattleShip extends JFrame {
         setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
         add(leftPanel);
         add(rightPanel);
-        pack();
-        setLocationRelativeTo(null); // отцентровка окна
+        pack();//Формируем  форму согласно заданным параметрам
+        setLocationRelativeTo(null);
         setVisible(true);
         init();
     }
 
-    void init() { // init all game object
+    void init() { // // Метод инициализации
         aiShips = new Ships(FIELD_SIZE, CELL_SIZE, false);
         humanShots = new Shots(CELL_SIZE);
-        board.setText(BTN_INIT);
+        textPanel.setText(BTN_INIT);
         gameOver = false;
         random = new Random();
     }
 
-    class Canvas extends JPanel { // for painting
+    class Canvas extends JPanel {
         @Override
         public void paint(Graphics g) {
             super.paint(g);

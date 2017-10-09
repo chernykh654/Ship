@@ -1,10 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-//Реализация объкта ячейка
-//@x,y  координаты ячейки
-//@color цвет   ячейки по умолчанию
-//RED  цветовая константа означающая смерть ячейки
+/*Реализация объкта ячейка
+@x,y  координаты ячейки
+@color цвет   ячейки по умолчанию
+RED  цветовая константа означающая смерть ячейки
+*/
 class Cell {
     private final Color RED = Color.red;
     private int x, y;
@@ -13,7 +14,7 @@ class Cell {
     Cell(int x, int y) {
         this.x = x;
         this.y = y;
-        color = Color.gray;
+        color = Color.gray;// Цвет ячейки по умолчанию
     }
 //Геттеры для доступа к переменным X и Y
     int getX() { return x; }
